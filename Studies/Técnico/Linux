@@ -1,0 +1,109 @@
+#Comandos Linux e coisas que aprendi#
+
+clear
+top/htop
+cd
+find
+rm
+cp
+mv
+mkdir
+rmdir
+grep
+cat/tac
+Curingas * ? {} [] ^
+git
+ls
+sudo sudo su su
+history
+pip
+nvim
+Tabela de particionamento
+partição
+Bios
+Sistema de arquivo
+ln link simbolico e hardlink *
+whatis
+apropos
+useradd adduser *
+piper *
+usermod *
+addgroup groupadd *
+; & && | || *
+>> >> < > >& | tee *
+chmod *
+who *
+ifconfig *
+ssh
+fine *
+poweroff
+logout
+xit
+tail *
+passwd
+fstab
+mkfs *
+man
+help
+lvm
+raid
+fdisk *
+modulos
+kernel
+lib
+conceitos de programação
+diretivas do linux
+cache
+swap
+memoria virtual
+gerenciador de pacote apt rpm
+pacotes universais
+depedencias
+repositorios
+buffer cache
+hibernação
+shell terminal console pseudo terminal
+editor de texto IDE
+systemd
+sysinit
+upstart
+estrutura de diretorios/arvore
+gerenciador de boot bootloader
+alias
+gerenciador de arquivo
+free *
+kill
+ps *
+killall
+time *
+bg *
+strace *
+sress *
+date
+hwclock
+runlevel
+lspci *
+lsub *
+ping
+less
+more *
+log
+cron *
+tar gz bz zip inzip gzip
+x11 wayland
+directx vulkan drxvk proton metal
+compilação
+camadas
+curl
+wget
+interface grafica
+systemcall
+gerenciadores
+historia
+licença
+filosofia
+gerenciador de janelas
+interface
+servidor grafico
+framework
+
