@@ -106,4 +106,5 @@ gerenciador de janelas
 interface
 servidor grafico
 framework
+touch altera data de criação, acesso e modificação, só não muda a data de alteração
 
