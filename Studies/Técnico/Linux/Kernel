@@ -1,0 +1,15 @@
+Kernel linux é monolítico e modular
+O Linux possui a característica de ser tanto monolítico (drivers dentro do kernel) quanto modular (drivers carregados externamente e dinamicamente quando necessário) e ambos possuem vantagens e desvantagens. Álém disso os loadable kernel module adcionam novas systemcalls tbm, além dos driver/suporte a novos hardware, eles são considerados parte do kernel, modulos open source já vem por padrão no kernel linux como o noveau da nvdia, essas partes externas que se tornam parte do kernel são carregadas no kernelspace.
+
+Mas nem tudo são drivers em kernel space… Sim, é possível escrever uma aplicação em Linux que possa acessar diretamente um dispositivo de hardware! À essa aplicação (ou biblioteca) damos o nome de user space device driver. Se você precisa escrever um driver proprietário, pode evitar problemas com licenças de módulos do kernel. Qualquer bug no driver rodando em espaço de usuário não vai impactar o funcionamento do kernel
+
+Mas se fossem apenas vantagens, não existiriam drivers rodando em kernel space! Drivers que rodam em espaço de usuário possuem algumas desvantage
+
+
+O termo módulos no Linux se referem aos drivers que são carregados fora do kernel e que são carregados no kernel space quando necessário e descarregados quando não são mais necessários, eles são carregados no kernel space. Modular no microkernel refere-se a suas daemons ou servidores.
+
+
+
+Daemons ou servidores: MICROKERNEL
+
+Todos os outros serviços são distribuídos e administrados de forma modular e isolada no user space por programas chamados daemons ou servidores. Tratam-se de programas que ficam em execução em plano de fundo e cada um sendo responsável por ser administrador de uma tarefa específica que anteriormente era administrada pelo próprio kernel
