@@ -1,0 +1,9 @@
+servidor grafico xorg wayland xwayland
+api grafica directx metal vulkan
+dxvk tradução proton
+chip grafico gpu
+arquitetura dos chips(processador) arm x86(amd64 ou i386)
+tecnologias vram gddr dlss ray tracing amd e nvdia
+driver de código aberto noveau, driver user space e driver kernel space
+wine
+chips compactos Socs M1 ou M2 apple, alguns em arm também
