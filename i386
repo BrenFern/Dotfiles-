@@ -1,0 +1,18 @@
+
+amd64 = é uma família de processadores basesados na tecnologia 64bits, são um superconjunto da arquitetura i386
+
+i386 = nome dado a família(arquitetura) de processadores, estes podem ser x86_64
+ou x86
+
+x86= é uma família de processadores basesados na tecnologia 32bits, são um superconjunto da arquitetura i386  
+
+Sistemas 64 bits tem uma limitação até 192 gb, enquanto 32 bits até 4gb
+
+OBS: Rodar sistemas 64 bits com menos de 4gb pode gerar uma grande queda de desempenho e consequentemente gargalo.
+
+ddr 2 minímo de = 512 mb
+ddr 3 = 2gb
+ddr 4 = 4gb
+ddr 5 = possívelmente 8gb
+
+
