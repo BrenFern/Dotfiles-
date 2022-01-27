@@ -1,0 +1,107 @@
+Oracle Cloud Infrastructure (OCI)
+
+Estrutura do OCI:
+
+Região e AD: O Oracle Cloud Infrastructure é hospedado em regiões e domínios de disponibilidade. Uma região é uma área geográfica localizada, e um domínio de disponibilidade é um ou mais data centers localizados em uma região. Uma região é composta de 1 a 3 domínios de disponibilidade. A maioria dos recursos do Oracle Cloud Infrastructure são específicos da região, como uma rede virtual na nuvem, ou específicos de um domínio de disponibilidade, como uma instância de computação. O tráfego entre os domínios de disponibilidade e entre as regiões é criptografado. Os domínios de disponibilidade são isolados entre si, tolerantes a falhas e raramente falham ao mesmo tempo. Como os domínios de disponibilidade não compartilham infraestrutura, como energia ou refrigeração, ou a rede interna do domínio de disponibilidade, uma falha em um domínio de disponibilidade dentro de uma região provavelmente não afetará a disponibilidade dos outros dentro da mesma região.
+
+Os domínios de disponibilidade da mesma região são conectados entre si por uma rede de baixa latência e alta largura de banda, o que possibilita o fornecimento de conectividade de alta disponibilidade à Internet e local e a criação de sistemas replicados em vários domínios de disponibilidade para alta disponibilidade e recuperação de desastres.
+
+
+Como as regiões requerem expansão, temos a opção de adicionar capacidade a domínios de disponibilidade existentes, adicionar domínios de disponibilidade adicionais a uma região existente ou criar uma nova região. A abordagem de expansão em um cenário específico é baseada nos requisitos do cliente, bem como nas considerações dos padrões de demanda regional e na disponibilidade de recursos.
+
+Para qualquer região com um domínio de disponibilidade, um segundo domínio de disponibilidade ou região no mesmo país ou área geopolítica será disponibilizada dentro de um ano para ativar mais opções de recuperação de desastres que atendam aos requisitos do cliente para residência de dados onde eles existirem.
+
+
+Nomes de Domínios de Disponibilidade da Tenancy
+
+O Oracle Cloud Infrastructure escolhe aleatoriamente os domínios de disponibilidade por tenancy 
+
+para ajudar a equilibrar a capacidade nos data centers. Por exemplo, o domínio de disponibilidade chamado PHX -AD-1 para tenancyA pode ser um data center diferente do daquele chamado de PHX-AD-1 para tenancyB. Para controlar qual domínio de disponibilidade corresponde a qual data center para cada tenancy, o Oracle Cloud Infrastructure usa prefixos específicos da tenancy para os nomes do domínio de disponibilidade. Por exemplo: os domínios de disponibilidade da sua tenancy são algo como Uocm: PHX-AD-1, Uocm: PHX-AD-2 e assim por diante.
+
+Para obter os nomes específicos dos domínios de disponibilidade da sua tenancy, use a operação ListAvailabilityDomains, que está disponível na API do IAM. Você também pode ver os nomes ao usar a Console para iniciar uma instância e escolher em qual domínio de disponibilidade iniciar a instância.
+
+#Contigência geográfica entre ADs(FD) em caso de regiões com mais de 1 AD ou usar 2 regiões diferentes com 1 AD com uma distância miníma necessária
+
+	# Podemos usar os ADs para fazer um par de load balancers e ter alta disponibilidade ou seja, tolerante a falha e distribuir carga/requisições, redundância,backup...
+	exemplo: 2 ads, com 3 fault domain, um ad load balancer ativo e o outro failover, pode ser público ou privado (ip).
+
+	OCI Load Balancer: Trabalha como um proxy distribuindo o tráfego tcp vindo da internet para VM na camada 4 ou na camada 7 com o http que roda encima do protoclo tcp, processando pacotes e filtrando
+
+	Network load balancer: ideal para ambientes de baixa latência e só trabalha na 3 e 4 (TCP/UDP), streaming, voip...
+
+FD: Um domínio de falha é um agrupamento de hardware e infraestrutura dentro de um domínio de disponibilidade. Cada domínio de disponibilidade contém três domínios de falha. Os domínios de falha oferecem antiafinidade: eles permitem distribuir suas instâncias para que elas não fiquem no mesmo hardware físico em um único domínio de disponibilidade. Uma falha de hardware ou um evento de manutenção de hardware do serviço Compute que afeta um domínio de falha não afeta instâncias em outros domínios de falha. Além disso, o hardware físico em um domínio de falha tem fontes de alimentação independentes e redundantes, o que impede que uma falha no hardware da fonte de alimentação dentro de um domínio de falha de afete outros domínios de falha.
+
+Realm: As regiões são agrupadas em realms . Sua tenancy existe em um único realm e pode acessar todas as regiões que pertencem a esse realm. Não é possível acessar regiões que não estejam no seu realm. No momento, o Oracle Cloud Infrastructure tem vários realms. Há um realm comercial. Há vários realms para o Cloud do Setor Governamental: Cloud do Setor Governamental dos EUA FedRAMP autorizado, IL5 autorizado e Cloud do Setor Governamental do Reino Unido.
+
+tenacy: equivale a conta em si do OCI
+
+IAM e políticas: A oracle trabalha com o modelo de segurança zero trust, ou seja, quando você cria um usuário no cloud, ele não pode fazer nada sem uma police/permissoes pois prrecisa de condições de acessos em seus compartimentos.
+
+OCID: Nada mais é do que o ID de de cada recurso utilizado na Oracle Cloud
+
+Security list: Nada mais são do que um conjunto de regras de firewall que são aplicadas numa subrede, stateful pra cada regra de entrada ele cria uma de saida automaticamente, stateless vai ter que criar uma manualmente de sair pra corresponder a de entrada
+
+Security Group: Basicamente são um conjunto de regras de firewall que são aplicadas somente na vnic da máquina, pra segmentar só para uma instância específica
+
+OBS.: VNIC é uma interface de rede virtual
+
+Taggs: Você pode usar as tags para organizar e listar recursos com base em suas necessidades de negócios, rastreamento de custos... O serviço Tagging oferece duas formas de adicionar tags aos recursos. Cada abordagem oferece um tipo distinto de tag para você trabalhar:
+
+    Tags definidas - os administradores de tags gerenciam metadados de recursos.
+    Tags de formato livre - metadados não gerenciados aplicados a recursos por usuários.
+
+
+Gateways:
+
+Internet: Gateway biderecional pra subnet pública pra acessar a internet e receber conexão dela
+
+NAT: gateway uniderecional pra subnet privada pra acessar a internet, mas é só saida, não recebe
+
+Service Gateway: Acessar recursos da Oracle Cloud que não estão em VCN
+
+DRG: Um DRG atua como um roteador virtual, fornecendo um caminho para o tráfego entre suas redes locais e VCNs, e também pode ser usado para rotear o tráfego entre VCNs. Usando diferentes tipos de anexos, topologias de rede personalizadas podem ser construídas usando componentes em diferentes regiões e tenancies através de um RPC.VPN 
+
+LPG VS RPC: ele também estabele conexões entre VCNS, a diferença é que ele vai estabeler conexões com VCNS que estão na mesma reigão
+
+API Gateway:O serviço API Gateway permite que você publique APIs com pontos finais privados acessíveis na sua rede e que você pode expor com endereços IP públicos se quiser que eles aceitem o tráfego da internet. Os pontos finais suportam validação de API, transformação de solicitação e resposta, CORS, autenticação e autorização e limitação de solicitação.
+
+Usando o serviço API Gateway, você cria um ou mais gateways de API em uma sub-rede regional para processar o tráfego de clientes de API e roteá-lo para serviços de back-end. Você pode usar um único gateway de API para vincular vários serviços de back-end (como balanceadores de carga, instâncias de computação e Oracle Functions) em um único ponto final de API consolidado.
+
+Você pode acessar o serviço API Gateway para definir gateways de API e implantações de API usando a Console e a API REST. 
+
+
+Formas de conexão:
+
+IP publico através de SSH, ip reservado ou efêmero, oferece 10TB de graça
+
+Oracle IpsecVPN e vc pode usar outras VPN, embora vc já tenha uma da oracle de graça
+
+FastEthernet privado, não passa pela internet e só cobra pela porta e não pelo tráfego
+
+Guardião
+
+compartimentos: Os compartimentos permitem que você organize e controle o acesso aos seus recursos de nuvem. Um compartimento é um conjunto de recursos relacionados (como instâncias, redes virtuais na nuvem, volumes em blocos) que só podem ser acessados por determinados grupos que receberam permissão de um administrador.
+
+instância: Uma instância é um host de computação em execução na nuvem. Uma instância de computação do Oracle Cloud Infrastructure permite utilizar hardware físico hospedado, em vez das máquinas virtuais tradicionais baseadas em software, garantindo um alto nível de segurança e desempenho. 
+
+Imagem: A imagem é um modelo de uma unidade de disco rígido virtual que determina o sistema operacional e outros softwares para uma instância, por exemplo, Oracle Linux. Ao acionar uma instância, você pode definir suas características escolhendo sua imagem. A Oracle fornece um conjunto de imagens de plataforma que você pode usar. Você também pode salvar uma imagem de uma instância que já tenha configurado para usar como modelo para iniciar mais instâncias com o mesmo software e personalizações. 
+
+host bare metal: O Oracle Cloud Infrastructure oferece o controle da máquina host física (“bare metal”). As instâncias de computação bare metal são executadas diretamente em servidores bare metal sem um hipervisor. Ao provisionar uma instância de computação bare metal, você mantém o controle exclusivo da CPU física, da memória e da placa de interface de rede (NIC). Você pode configurar e utilizar os recursos completos de cada máquina física, como se fosse um hardware em execução no seu próprio data center. Você não compartilha a máquina física com outros tenants. 
+
+subredes: É uma subdivisão lógica de uma rede grande em redes menores, resulta num tráfego de rede reduzido, administração simplificada e melhor performance de rede. Existem subredes regionais nas quais ocupam toda a sua região e os seus ads, ou as especificas de AD,200 vcn por região, cada VCN pode ter no máximo 300 subrede. Elas podem ser privadas contendo um ip privado apenas ou pública contendo um privado e um público, as privada usam um gateway nat pra se comunicar com a internet, além de um service gateway para utilizar alguns recursos da oracle que não estão na internet, já um subnet pública usa só um internet gay. 
+
+SDKs: Vários Kits de Desenvolvimento de Software estão disponíveis para fácil integração com as APIs do Oracle Cloud Infrastructure, incluindo SDKs para Java, Ruby e Python. Para obter mais informações, consulte Recursos do Desenvolvedor.
+
+Ansible: O Oracle suporta o uso do Ansible para provisionamento, orquestração e gerenciamento de configuração da infraestrutura de nuvem.
+
+Resource Manager: Resource Manager é um serviço do Oracle Cloud Infrastructure que permite que você automatize o processo de provisionamento dos seus recursos do Oracle Cloud Infrastructure. Usando o Terraform, o serviço Resource Manager ajuda a instalar, configurar e gerenciar recursos por meio do modelo "infraestrutura como código". Para obter mais informações, consulte o serviço Resource Manager.
+
+API: As APIs do Oracle Cloud Infrastructure são APIs REST típicas que usam solicitações e respostas HTTPS. Consulte Solicitações de API.
+
+Terraform: ferramenta de provisionamento de infraestrutura como código (IAC)
+
+Console: Interface gŕafica web responsável por criar e gerenciar os recursos do OCI
+
+CLI: Alguns serviços do OCI são possíveis de se gerenciar através de uma interface de linha de comando
+
+
