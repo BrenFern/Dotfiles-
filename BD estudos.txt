@@ -1,0 +1,97 @@
+SQL - Structure Query Language
+
+Linguagem de consulta estrutural, relacional para acessar um banco de dados e realizar querys, manipular tabelas e registros
+
+Usada em vários SGBD (Sistema de gerenciamento de banco de dados) como MySQL, SQL Server, Acess, PostgreSQL.
+
+Cada SGBD com a sua extensão ao sql, como o T-SQL/Transact-SQL(SQL Server) ou PL/SQL(Oracle) ou JET SQL(Acess)
+
+
+DDL - Data Definition Language
+
+Create: Cria uma nova Tabela, banco de dados, visão, ou outro objeto
+
+Alter: Modifica um objeto existente no BD, como uma tabela.
+
+Drop: Exclui uma tabela inteira, uma exibição de uma tabela ou outro objeto no BD
+
+DML - Data Manipulation Language
+
+Insert - Cria um registro (linha)
+
+Update - Modifica registros
+
+Delete - Exclui Registros
+
+DCL - Data Control Language
+
+Grant - Dá previlégios a um usuário
+
+Revoke - retira previlégios de um usuário
+
+DQL - Data Query Language
+
+Select - Obtém registros específicos de uma ou mais tabelas
+
+Um Banco de dados relacional é composto por:
+
+Tabelas (ou relações ou entidades)
+Colunas (Campos ou atributos)
+Registros (Linhas ou tuplas)
+
+As tabelas são objetos aonde os dados são armazenados em um banco de dados relacional
+Uma tabela é uma coleção de entrada de dados relacionado e consiste em linhas e colunas
+
+Uma coluna é um campo em uma tabela que contém informaçôes específicas sobre cada registro como nome, data de nascimento, salário, preço...
+
+Registros são entradas individuais em uma tabela, conjunto de atributos que forma linhas
+
+Tipos de dados
+
+CHAR - string de caracteres de tamanho fixo, 8000 chars
+VARCHAR - String de caracteres variável, 8000 chars
+NCHAR - dados unicode de tamanho fixo, 4000 chars
+NVARCHAR - dados unicode de tamanho variável, 400 chars
+bit - 0, 1 ou nulo
+tinyint - inteiros de 0 a 255
+smallint - inteiros de -32768 a 32767
+real - números de ponto flutuante, númer com ponto e virgula
+Datetime - 01/01/1753 a 31/12/9999
+Smalldatetime - de 01/01/1900 a 06/06/2079
+date - 01/01/0001 a 31/12/9999 
+money - dados monetários
+time - hora
+text - cadeia de caracteres varíaveis
+
+use - para direcionar os comandos para o banco de dados específico
+
+sp_helpdb - informa o tamanho, taxa de crescimento, local e outras informações do BD. Exclusive do SQLServer
+
+-- = para comentar no SQLServer
+
+Restriçôes são regras aplicadas nas colunas de uma tabela
+São usadas para limitar os tipos de dados inseridos em cada coluna
+podem ser especificados no momento da criação com o create ou após com o alter
+
+NOT NULL - não aceita valores nulos, o campo sempre vai ter um valor, não é possível inserir uma linha sem valor
+
+UNIQUE - identificação única de um registro em uma tabela de um bd
+Você pode ter várias constraints UNIQUE em uma tabela, mas apena uma chave primária por tabela.
+
+PRIMARY KEY - Contem automaticamente uma restrição unique definida, servindo também como indetificador único para cada registro em uma tabela de bd
+Chaves primários devem conter valores únicos
+Não pode conter valores null
+Cada tabela deve ter uma chave primária e apena uma
+
+
+FOREIGN KEY - chaves estrangeiro em uma tabela é um campo que aponta para uma chave primária em outra tabela
+CONSTRAINT fk_ID_autor FOREIGN KEY (ID_autor)
+REFERENCES tbl_autores(ID_autor)
+
+CHECK - serve para limitar uma faixa de valores que podem ser colocados em uma coluna ou tabela inteira
+
+DEFAULT - insere um valor padrão na coluna, o valor padrão será adcionado a todos os novos registros casos nenhum outro valor seja especificado
+
+1 FN - uma tabela não tem atributos/colunas compostas, multilvaloradas ou uma combinação de ambos. Para as compostas vc decompôem em mais colunas, para as multivaloradas vc cria uma nova tabela, repetindo a chave estrangeira as vezes que precisar.
+
+2 FN - Uma coluna não pode ter uma depêndencia parcial de uma chave primária composta
