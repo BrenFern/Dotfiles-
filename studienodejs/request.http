@@ -1,0 +1,13 @@
+POST http://localhost:4002/products
+Content-Type: application/json
+
+{
+    "name": "Caneta amarelo",
+    "price": 3.55
+}
+###
+GET  http://localhost:4002/products
+
+###
+
+GET http://localhost:4002/products/
